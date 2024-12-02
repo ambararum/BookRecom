@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation System</title>
+</head>
+<body>
+    <h1>Book Recommendation System</h1>
+    <form method="POST" action="/">
+        <label for="keyword">Enter a keyword:</label>
+        <input type="text" id="keyword" name="keyword" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if recommendations %}
+        <h2>Recommended Books:</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Authors</th>
+                    <th>Description</th>
+                    <th>Categories</th>
+                    <th>Cosine Similarity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in recommendations.itertuples() %}
+                    <tr>
+                        <td>{{ book.title }}</td>
+                        <td>{{ book.authors }}</td>
+                        <td>{{ book.description }}</td>
+                        <td>{{ book.categories }}</td>
+                        <td>{{ book.cosine_similarity }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No recommendations found. Please try another keyword.</p>
+    {% endif %}
+</body>
+</html>
